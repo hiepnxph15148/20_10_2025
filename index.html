@@ -2329,7 +2329,7 @@
                 clearInterval(timoutTextLetter);
                 setTimeout(() => {
                     funcTimeoutLetterContent()
-                }, 500)
+                }, 200) // Giảm delay từ 500ms xuống 200ms
             }
         }
         function funcTimeoutLetter() {
@@ -2338,7 +2338,7 @@
             clearInterval(timoutTextLetter);
             timoutTextLetter = setInterval(() => {
                 textCharLetter();
-            }, 200)
+            }, 80) // Tăng tốc từ 200ms xuống 80ms
         }
 
         // chữ của thư bạn muốn gửi
@@ -2363,7 +2363,7 @@
             clearInterval(timoutTextLetterContent);
             timoutTextLetterContent = setInterval(() => {
                 textCharLetterContent();
-            }, 100)
+            }, 40) // Tăng tốc từ 100ms xuống 40ms
         }
         $(document).ready(function () {
             $('.valentines').mouseenter(function () {
@@ -2378,7 +2378,7 @@
 
             $('.card').click(function () {
                 $('.box-content').addClass('active');
-                $(".wrapperLetterForm").fadeIn(function() {
+                $(".wrapperLetterForm").fadeIn(300, function() {
                     // Create floating particles around the letter
                     createLetterParticles();
                 });
