@@ -68,6 +68,9 @@
             scroll-behavior: smooth;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            width: 100%;
+            height: 100%;
         }
 
         body {
@@ -76,6 +79,10 @@
             background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 25%, #ffdde1 50%, #ffc3f0 75%, #ff9a9e 100%);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
+            width: 100%;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
         }
 
         @keyframes gradientShift {
@@ -802,12 +809,17 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .boxLetter .formLetter {
             position: relative;
             width: min(600px, 90vw);
             height: auto;
+            max-height: 85vh;
             min-height: 350px;
             background: linear-gradient(135deg, #fff5f7 0%, #ffe4e9 50%, #ffd3ee 100%);
             border-radius: 20px;
@@ -815,6 +827,8 @@
             padding: 20px 15px;
             box-shadow: 0 20px 60px rgba(255, 105, 180, 0.4), 0 0 40px rgba(255, 182, 193, 0.3);
             animation: formGlow 3s ease-in-out infinite;
+            box-sizing: border-box;
+            overflow: hidden;
         }
 
         @keyframes formGlow {
@@ -834,14 +848,18 @@
             border-radius: inherit;
             display: flex;
             box-shadow: inset 0 0 20px rgba(255, 105, 180, 0.2);
-            overflow: hidden;
+            overflow-y: auto;
+            overflow-x: hidden;
             padding: 10px;
+            box-sizing: border-box;
+            -webkit-overflow-scrolling: touch;
         }
 
         .boxLetter .before {
             position: absolute;
             width: min(600px, 90vw);
             height: auto;
+            max-height: 85vh;
             min-height: 350px;
             background: linear-gradient(135deg, #ffe4e9 0%, #ffc3f0 100%);
             transform: rotate(-15deg);
@@ -909,13 +927,17 @@
         .textLetter {
             width: 100%;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             display: flex;
             align-items: center;
             user-select: none;
             position: relative;
             z-index: 100;
-            padding: 20px 10px;
+            padding: 15px 10px;
+            max-height: 100%;
+            overflow-y: auto;
+            box-sizing: border-box;
+            -webkit-overflow-scrolling: touch;
         }
 
         .textLetter h2 {
@@ -971,27 +993,7 @@
         }
 
         .heartAnimation {
-            position: absolute;
-            width: 200px;
-            bottom: 0;
-            filter: drop-shadow(0 0 20px rgba(255, 105, 180, 0.8));
-            animation: heartGlow 2s ease-in-out infinite;
-            z-index: 50;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        @keyframes heartGlow {
-            0%, 100% {
-                filter: drop-shadow(0 0 20px rgba(255, 105, 180, 0.8));
-            }
-            50% {
-                filter: drop-shadow(0 0 35px rgba(255, 105, 180, 1)) drop-shadow(0 0 50px rgba(255, 182, 193, 0.8));
-            }
-        }
-
-        .heartAnimation img {
-            width: 100%;
+            display: none;
         }
 
         /* Decorative Corners */
@@ -1381,6 +1383,10 @@
 
         /* Responsive Styles for Mobile */
         @media screen and (max-width: 768px) {
+            body {
+                overflow-x: hidden;
+            }
+
             .container {
                 height: 100vh;
                 padding: 20px;
@@ -1407,6 +1413,20 @@
             .glow-orb {
                 filter: blur(30px);
                 opacity: 0.4;
+            }
+
+            .boxLetter {
+                padding: 10px;
+            }
+
+            .boxLetter .formLetter {
+                max-height: 90vh;
+                min-height: auto;
+                padding: 15px 10px;
+            }
+
+            .wrapperLetterForm {
+                overflow: hidden;
             }
 
             .letter {
@@ -1553,6 +1573,10 @@
         }
 
         @media screen and (max-width: 480px) {
+            body {
+                overflow-x: hidden;
+            }
+
             .letter {
                 transform: scale(0.65);
             }
@@ -1626,12 +1650,21 @@
                 top: 72% !important;
             }
 
+            .boxLetter {
+                padding: 5px;
+            }
+
             .boxLetter .formLetter,
             .boxLetter .before {
                 width: 95vw;
                 max-width: 350px;
-                min-height: 280px;
-                padding: 15px 10px;
+                max-height: 85vh;
+                min-height: auto;
+                padding: 12px 8px;
+            }
+
+            .wrapperLetterForm {
+                overflow: hidden;
             }
 
             .textLetter h2 {
@@ -1730,31 +1763,33 @@
 
         /* Landscape orientation on mobile */
         @media screen and (max-width: 926px) and (orientation: landscape) {
+            .boxLetter {
+                padding: 5px;
+            }
+
             .boxLetter .formLetter,
             .boxLetter .before {
                 width: 70vw;
                 max-width: 500px;
-                min-height: 250px;
+                max-height: 90vh;
+                min-height: auto;
+                padding: 10px;
+            }
+
+            .textLetter {
+                padding: 10px 5px;
             }
 
             .textLetter h2 {
                 font-size: clamp(18px, 4vw, 24px);
-                margin-bottom: 10px;
+                margin-bottom: 8px;
+                padding: 3px 10px;
             }
 
             .textLetter .contentLetter {
                 font-size: clamp(13px, 3vw, 16px);
-                padding: 0px 15px;
+                padding: 8px 12px;
                 line-height: 1.4;
-            }
-
-            .heartAnimation {
-                width: 80px;
-            }
-
-            .mewmew1,
-            .mewmew2 {
-                width: 45px;
             }
 
             .letter {
